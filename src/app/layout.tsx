@@ -1,4 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react'
+import { Viewport } from 'next'
 
 import './global.css'
 
@@ -20,5 +21,12 @@ const RootLayout: FunctionComponent<LayoutProps> = ({ children }) => (
     </body>
   </html>
 )
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export default RootLayout
