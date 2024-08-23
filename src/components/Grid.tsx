@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { Stage, Layer, Rect } from 'react-konva'
 import { useMeasure } from '@uidotdev/usehooks'
 
@@ -12,7 +12,7 @@ interface Props {
 const cellSize = 20
 const cellPadding = 5
 
-const Grid: React.FunctionComponent<Props> = ({ height, width }) => {
+const Grid: FunctionComponent<Props> = ({ height, width }) => {
   const baseWidth = (cellSize + cellPadding) * width - cellPadding
   const baseHeight = (cellSize + cellPadding) * height - cellPadding
   const [ref, bounds] = useMeasure()
