@@ -1,7 +1,13 @@
+:root {
+  --system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 body,
 html {
   margin: 0;
   padding: 0;
+  font-family: var(--system-ui);
+  text-align: center;
 }
 
 * {
