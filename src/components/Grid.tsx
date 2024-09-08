@@ -1,11 +1,14 @@
 import React, { FunctionComponent, useMemo } from 'react'
 import classNames from 'classnames'
 
+import { Cell, getCell } from '../Cell'
+
 import styles from './Grid.module.css'
 
 interface Props {
   width: number
   height: number
+  data: Cell[]
 }
 
 const cellSize = 20
@@ -15,9 +18,7 @@ const greatestCommonDivisor = (a: number, b: number): number => {
   return greatestCommonDivisor(b, a % b)
 }
 
-const Grid: FunctionComponent<Props> = ({ height, width }) => {
-  const data = Array.from({ length: height * width })
-
+const Grid: FunctionComponent<Props> = ({ height, width, data }) => {
   const rows = Array.from({ length: height })
   const columns = Array.from({ length: width })
 
@@ -28,17 +29,25 @@ const Grid: FunctionComponent<Props> = ({ height, width }) => {
     <div className={styles.container}>
       <svg viewBox={[0, 0, cellSize * width, cellSize * height].join(' ')}>
         <g name="cells">
-          {data.map((_, index) => (
-            <rect
-              x={cellSize * (index % width)}
-              y={cellSize * Math.floor(index / width)}
-              width={cellSize}
-              height={cellSize}
-              key={index}
-              className={classNames(styles.cell)}
-              rx={5}
-            />
-          ))}
+          {rows.map((_, index) =>
+            columns.map((_, j) => {
+              const cell = getCell(data, width, j, index)
+
+              return (
+                <rect
+                  x={cellSize * j}
+                  y={cellSize * index}
+                  width={cellSize}
+                  height={cellSize}
+                  key={j}
+                  className={classNames(styles.cell, {
+                    [styles.filled]: cell === Cell.Filled,
+                  })}
+                  rx={5}
+                />
+              )
+            })
+          )}
         </g>
         <g name="row-lines">
           {rows.map((_, index) => (

@@ -1,11 +1,17 @@
-'use client'
-
 import { NextPage } from 'next'
 import React from 'react'
-import dynamic from 'next/dynamic'
 
-const Grid = dynamic(() => import('../components/Grid'), { ssr: false })
+import Grid from '../components/Grid'
+import { Cell } from '../Cell'
 
-const Page: NextPage = () => <Grid width={8} height={12} />
+const Page: NextPage = () => {
+  const width = 8
+  const height = 12
+  const data: Cell[] = Array.from({ length: height * width }).map(() =>
+    Math.random() > 0.5 ? Cell.Filled : Cell.Empty
+  )
+
+  return <Grid width={width} height={height} data={data} />
+}
 
 export default Page

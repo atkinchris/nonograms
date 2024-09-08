@@ -2,12 +2,18 @@
   height: 100%;
   width: 100%;
   aspect-ratio: 1;
+
+  --background: #ffffff;
 }
 
 .cell {
-  stroke: white;
-  fill: #000000;
+  stroke: var(--background);
   stroke-width: 5;
+  fill: var(--background);
+}
+
+.cell.filled {
+  fill: #000000;
 }
 
 .line {
