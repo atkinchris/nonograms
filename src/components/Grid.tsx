@@ -10,6 +10,7 @@ interface Props {
   width: number
   height: number
   data: Cell[]
+  onCellClick: (x: number, y: number) => void
 }
 
 const cellSize = 20
@@ -19,7 +20,7 @@ const greatestCommonDivisor = (a: number, b: number): number => {
   return greatestCommonDivisor(b, a % b)
 }
 
-const Grid: FunctionComponent<Props> = ({ height, width, data }) => {
+const Grid: FunctionComponent<Props> = ({ height, width, data, onCellClick }) => {
   const rows = Array.from({ length: height })
   const columns = Array.from({ length: width })
 
@@ -30,14 +31,17 @@ const Grid: FunctionComponent<Props> = ({ height, width, data }) => {
     <div className={styles.container}>
       <svg viewBox={[0, 0, cellSize * width, cellSize * height].join(' ')}>
         <g name="cells">
-          {rows.map((_, index) =>
-            columns.map((_, j) => (
+          {rows.map((_, y) =>
+            columns.map((_, x) => (
               <CellElement
-                key={j}
-                cell={getCell(data, width, j, index)}
-                x={cellSize * j}
-                y={cellSize * index}
+                key={x}
+                cell={getCell(data, width, x, y)}
+                x={cellSize * x}
+                y={cellSize * y}
                 size={cellSize}
+                onClick={() => {
+                  onCellClick(x, y)
+                }}
               />
             ))
           )}

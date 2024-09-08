@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
 import React from 'react'
 
-import Grid from '../components/Grid'
 import { Cell } from '../types'
+import Game from '../components/Game'
 
 const Page: NextPage = () => {
   const width = 8
@@ -13,7 +13,7 @@ const Page: NextPage = () => {
     return Cell.Empty
   })
 
-  return <Grid width={width} height={height} data={data} />
+  return <Game width={width} height={height} initialData={data} />
 }
 
 export default Page

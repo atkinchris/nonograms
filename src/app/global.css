@@ -11,6 +11,7 @@ html {
   padding: 0;
   font-family: var(--system-ui);
   text-align: center;
+  user-select: none;
 }
 
 * {

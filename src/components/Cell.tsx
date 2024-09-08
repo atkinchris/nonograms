@@ -9,9 +9,10 @@ interface Props {
   x: number
   y: number
   size: number
+  onClick: () => void
 }
 
-const CellElement: FunctionComponent<Props> = ({ cell, x, y, size }) => (
+const CellElement: FunctionComponent<Props> = ({ cell, x, y, size, onClick }) => (
   <svg x={x} y={y} width={size} height={size}>
     {cell === Cell.Filled && <rect className={styles.filled} width="80%" height="80%" x="10%" y="10%" rx="5" />}
     {cell === Cell.Flagged && (
@@ -20,6 +21,7 @@ const CellElement: FunctionComponent<Props> = ({ cell, x, y, size }) => (
         <line x1="20%" y1="20%" x2="80%" y2="80%" />
       </g>
     )}
+    <rect fill="transparent" width="100%" height="100%" onClick={onClick} />
   </svg>
 )
 
