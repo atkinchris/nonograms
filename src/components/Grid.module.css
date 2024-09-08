@@ -7,8 +7,6 @@
 }
 
 .cell {
-  stroke: var(--background);
-  stroke-width: 5;
   fill: var(--background);
 }
 
