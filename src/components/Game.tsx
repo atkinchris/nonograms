@@ -2,7 +2,8 @@
 
 import React, { FunctionComponent, useState } from 'react'
 
-import { Cell } from '../types'
+import { Cell, getColumnCells, getRowCells, toGroups } from '../utils/cells'
+import { iter } from '../utils/array'
 
 import Grid from './Grid'
 import Controls from './Controls'
@@ -10,11 +11,17 @@ import Controls from './Controls'
 interface Props {
   height: number
   width: number
-  initialData: Cell[]
+  solution: Cell[]
 }
 
-const Game: FunctionComponent<Props> = ({ height, width, initialData }) => {
-  const [data, setData] = useState(initialData)
+const Game: FunctionComponent<Props> = ({ height, width, solution }) => {
+  const rowRequirements = iter(height, y => toGroups(getRowCells(solution, width, y)))
+  const colRequirements = iter(width, x => toGroups(getColumnCells(x, solution, width)))
+
+  // eslint-disable-next-line no-console
+  console.log(rowRequirements, colRequirements)
+
+  const [data, setData] = useState(iter(height * width, () => Cell.Empty))
   const [mode, setMode] = useState<Cell.Filled | Cell.Flagged>(Cell.Filled)
 
   const handleCellClick = (x: number, y: number) => {

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 
-import { Cell } from '../types'
+import { Cell } from '../utils/cells'
 
 import { Filled, Flagged } from './Cell'
 import styles from './Controls.module.css'

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
-import { Cell } from '../types'
+import { Cell } from '../utils/cells'
 
 import styles from './Cell.module.css'
 

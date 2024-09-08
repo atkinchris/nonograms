@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react'
 import classNames from 'classnames'
 
-import { Cell, getCell } from '../types'
+import { Cell, getCell } from '../utils/cells'
 
 import styles from './Grid.module.css'
 import CellElement from './Cell'
