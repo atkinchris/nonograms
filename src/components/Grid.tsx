@@ -1,6 +1,4 @@
 import React, { FunctionComponent } from 'react'
-import { Stage, Layer, Rect } from 'react-konva'
-import { useMeasure } from '@uidotdev/usehooks'
 
 import styles from './Grid.module.css'
 
@@ -13,31 +11,29 @@ const cellSize = 20
 const cellPadding = 5
 
 const Grid: FunctionComponent<Props> = ({ height, width }) => {
-  const baseWidth = (cellSize + cellPadding) * width - cellPadding
-  const baseHeight = (cellSize + cellPadding) * height - cellPadding
-  const [ref, bounds] = useMeasure()
-  const data = Array.from({ length: height * width }, (_, i) => i)
-
-  const stageWidth = bounds.width ?? baseWidth
-  const stageHeight = bounds.height ?? baseHeight
-  const scale = stageWidth / baseWidth
+  const data = Array.from({ length: height * width })
 
   return (
-    <div ref={ref} className={styles.container}>
-      <Stage width={stageWidth} height={stageHeight} scaleX={scale} scaleY={scale}>
-        <Layer>
-          {data.map((item, index) => (
-            <Rect
-              x={(cellSize + cellPadding) * (index % width)}
-              y={(cellSize + cellPadding) * Math.floor(index / width)}
-              width={cellSize}
-              height={cellSize}
-              fill="red"
-              key={index}
-            />
-          ))}
-        </Layer>
-      </Stage>
+    <div className={styles.container}>
+      <svg
+        viewBox={[
+          -cellPadding,
+          -cellPadding,
+          (cellSize + cellPadding) * width + cellPadding,
+          (cellSize + cellPadding) * height + cellPadding,
+        ].join(' ')}
+      >
+        {data.map((_, index) => (
+          <rect
+            x={(cellSize + cellPadding) * (index % width)}
+            y={(cellSize + cellPadding) * Math.floor(index / width)}
+            width={cellSize}
+            height={cellSize}
+            fill="red"
+            key={index}
+          />
+        ))}
+      </svg>
     </div>
   )
 }
