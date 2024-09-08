@@ -17,13 +17,13 @@
   justify-content: space-around;
 }
 
-.rowHints > div {
+.rowHints .hint {
   display: flex;
   flex-direction: row;
   justify-content: end;
 }
 
-.rowHints > div > span {
+.rowHints .hint .hintValue {
   margin-right: 1rem;
 }
 
@@ -34,14 +34,24 @@
   justify-content: space-around;
 }
 
-.columnHints > div {
+.columnHints .hint {
   display: flex;
   flex-direction: column;
   justify-content: end;
 }
 
-.columnHints > div > span {
+.columnHints .hint .hintValue {
   margin-bottom: 0.5rem;
+}
+
+.hint.error {
+  color: #ff2e63;
+  font-weight: bold;
+}
+
+.hintValue.satisfied {
+  text-decoration: line-through;
+  opacity: 0.2;
 }
 
 .gameGrid {
