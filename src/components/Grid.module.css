@@ -3,3 +3,16 @@
   width: 100%;
   aspect-ratio: 1;
 }
+
+.cell {
+  fill: none;
+}
+
+.line {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 0.1;
+}
+
+.line.divider {
+  stroke-width: 0.6;
+}
