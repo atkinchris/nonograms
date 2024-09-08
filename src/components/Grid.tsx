@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react'
 import classNames from 'classnames'
 
-import { Cell, getCell } from '../Cell'
+import { Cell, getCell } from '../types'
 
 import styles from './Grid.module.css'
+import CellElement from './Cell'
 
 interface Props {
   width: number
@@ -30,57 +31,42 @@ const Grid: FunctionComponent<Props> = ({ height, width, data }) => {
       <svg viewBox={[0, 0, cellSize * width, cellSize * height].join(' ')}>
         <g name="cells">
           {rows.map((_, index) =>
-            columns.map((_, j) => {
-              const cell = getCell(data, width, j, index)
-
-              return (
-                <svg
-                  x={cellSize * j}
-                  y={cellSize * index}
-                  width={cellSize}
-                  height={cellSize}
-                  key={j}
-                  className={styles.cell}
-                >
-                  {cell === Cell.Filled && (
-                    <rect className={styles.filled} width="80%" height="80%" x="10%" y="10%" rx="5" />
-                  )}
-                  {cell === Cell.Flagged && (
-                    <g className={styles.flagged}>
-                      <line x1="20%" y1="80%" x2="80%" y2="20%" />
-                      <line x1="20%" y1="20%" x2="80%" y2="80%" />
-                    </g>
-                  )}
-                </svg>
-              )
-            })
+            columns.map((_, j) => (
+              <CellElement
+                key={j}
+                cell={getCell(data, width, j, index)}
+                x={cellSize * j}
+                y={cellSize * index}
+                size={cellSize}
+              />
+            ))
           )}
         </g>
         <g name="row-lines">
           {rows.map((_, index) => (
             <line
-              x1={0}
-              x2={cellSize * width}
+              x1="0%"
+              x2="100%"
               y1={cellSize * index}
               y2={cellSize * index}
               key={index}
               className={classNames(styles.line, isDivider(index) && styles.divider)}
             />
           ))}
-          <line x1={0} x2={cellSize * width} y1={cellSize * height} y2={cellSize * height} className={styles.line} />
+          <line x1="0%" x2="100%" y1={cellSize * height} y2={cellSize * height} className={styles.line} />
         </g>
         <g name="column-lines">
           {columns.map((_, index) => (
             <line
               x1={cellSize * index}
               x2={cellSize * index}
-              y1={0}
-              y2={cellSize * height}
+              y1="0%"
+              y2="100%"
               key={index}
               className={classNames(styles.line, isDivider(index) && styles.divider)}
             />
           ))}
-          <line x1={cellSize * width} x2={cellSize * width} y1={0} y2={cellSize * height} className={styles.line} />
+          <line x1={cellSize * width} x2={cellSize * width} y1="0%" y2="100%" className={styles.line} />
         </g>
       </svg>
     </div>

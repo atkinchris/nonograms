@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import React from 'react'
 
 import Grid from '../components/Grid'
-import { Cell } from '../Cell'
+import { Cell } from '../types'
 
 const Page: NextPage = () => {
   const width = 8

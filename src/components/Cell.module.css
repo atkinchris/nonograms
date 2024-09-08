@@ -1,0 +1,9 @@
+.filled {
+  fill: var(--foreground);
+}
+
+.flagged line {
+  stroke: var(--foreground);
+  stroke-width: 0.6;
+  stroke-linecap: round;
+}
