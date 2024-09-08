@@ -4,14 +4,17 @@
   aspect-ratio: 1;
 
   --background: #ffffff;
+  --foreground: #000000;
 }
 
-.cell {
-  fill: var(--background);
+.cell .filled {
+  fill: var(--foreground);
 }
 
-.cell.filled {
-  fill: #000000;
+.cell .flagged line {
+  stroke: var(--foreground);
+  stroke-width: 0.6;
+  stroke-linecap: round;
 }
 
 .line {

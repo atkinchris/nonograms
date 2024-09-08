@@ -34,17 +34,23 @@ const Grid: FunctionComponent<Props> = ({ height, width, data }) => {
               const cell = getCell(data, width, j, index)
 
               return (
-                <svg x={cellSize * j} y={cellSize * index} width={cellSize} height={cellSize} key={j}>
-                  <rect
-                    className={classNames(styles.cell, {
-                      [styles.filled]: cell === Cell.Filled,
-                    })}
-                    rx={5}
-                    x="10%"
-                    y="10%"
-                    width="80%"
-                    height="80%"
-                  />
+                <svg
+                  x={cellSize * j}
+                  y={cellSize * index}
+                  width={cellSize}
+                  height={cellSize}
+                  key={j}
+                  className={styles.cell}
+                >
+                  {cell === Cell.Filled && (
+                    <rect className={styles.filled} width="80%" height="80%" x="10%" y="10%" rx="5" />
+                  )}
+                  {cell === Cell.Flagged && (
+                    <g className={styles.flagged}>
+                      <line x1="20%" y1="80%" x2="80%" y2="20%" />
+                      <line x1="20%" y1="20%" x2="80%" y2="80%" />
+                    </g>
+                  )}
                 </svg>
               )
             })

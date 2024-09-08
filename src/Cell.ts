@@ -1,6 +1,7 @@
 const enum Cell {
   Empty,
   Filled,
+  Flagged,
 }
 
 const getCell = (data: number[], width: number, x: number, y: number): Cell => {
