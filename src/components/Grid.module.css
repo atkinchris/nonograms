@@ -1,9 +1,3 @@
-.container {
-  height: 100%;
-  width: 100%;
-  aspect-ratio: 1;
-}
-
 .line {
   stroke: #252a34;
   stroke-width: 0.1;

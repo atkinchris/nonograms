@@ -7,6 +7,7 @@ import { iter } from '../utils/array'
 
 import Grid from './Grid'
 import Controls from './Controls'
+import styles from './Game.module.css'
 
 interface Props {
   height: number
@@ -18,11 +19,18 @@ const Game: FunctionComponent<Props> = ({ height, width, solution }) => {
   const rowRequirements = iter(height, y => toGroups(getRowCells(solution, width, y)))
   const colRequirements = iter(width, x => toGroups(getColumnCells(x, solution, width)))
 
-  // eslint-disable-next-line no-console
-  console.log(rowRequirements, colRequirements)
-
-  const [data, setData] = useState(iter(height * width, () => Cell.Empty))
+  const [data, setData] = useState(solution)
   const [mode, setMode] = useState<Cell.Filled | Cell.Flagged>(Cell.Filled)
+
+  const rows = iter(height, y => ({
+    groups: rowRequirements[y],
+    isValid: toGroups(getRowCells(data, width, y)).join('') === rowRequirements[y].join(''),
+  }))
+
+  const columns = iter(width, x => ({
+    groups: colRequirements[x],
+    isValid: toGroups(getColumnCells(x, data, width)).join('') === colRequirements[x].join(''),
+  }))
 
   const handleCellClick = (x: number, y: number) => {
     const index = y * width + x
@@ -32,9 +40,31 @@ const Game: FunctionComponent<Props> = ({ height, width, solution }) => {
   }
 
   return (
-    <div>
-      <Grid width={width} height={height} data={data} onCellClick={handleCellClick} />
-      <Controls mode={mode} onModeChange={setMode} />
+    <div className={styles.container}>
+      <div className={styles.columnHints}>
+        {columns.map(({ groups }, index) => (
+          <div key={index}>
+            {groups.map((group, i) => (
+              <span key={i}>{group}</span>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className={styles.rowHints}>
+        {rows.map(({ groups }, index) => (
+          <div key={index}>
+            {groups.map((group, i) => (
+              <span key={i}>{group}</span>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className={styles.gameGrid}>
+        <Grid width={width} height={height} data={data} onCellClick={handleCellClick} />
+      </div>
+      <div className={styles.controls}>
+        <Controls mode={mode} onModeChange={setMode} />
+      </div>
     </div>
   )
 }

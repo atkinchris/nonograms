@@ -1,0 +1,53 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    '. columnHints'
+    'rowHints gameGrid'
+    'controls controls';
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto 1fr;
+
+  white-space: nowrap;
+}
+
+.rowHints {
+  grid-area: rowHints;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.rowHints > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.rowHints > div > span {
+  margin-right: 1rem;
+}
+
+.columnHints {
+  grid-area: columnHints;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.columnHints > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.columnHints > div > span {
+  margin-bottom: 0.5rem;
+}
+
+.gameGrid {
+  grid-area: gameGrid;
+}
+
+.controls {
+  grid-area: controls;
+}
