@@ -27,6 +27,19 @@ const Grid: FunctionComponent<Props> = ({ height, width }) => {
   return (
     <div className={styles.container}>
       <svg viewBox={[0, 0, cellSize * width, cellSize * height].join(' ')}>
+        <g name="cells">
+          {data.map((_, index) => (
+            <rect
+              x={cellSize * (index % width)}
+              y={cellSize * Math.floor(index / width)}
+              width={cellSize}
+              height={cellSize}
+              key={index}
+              className={classNames(styles.cell)}
+              rx={5}
+            />
+          ))}
+        </g>
         <g name="row-lines">
           {rows.map((_, index) => (
             <line
@@ -53,16 +66,6 @@ const Grid: FunctionComponent<Props> = ({ height, width }) => {
           ))}
           <line x1={cellSize * width} x2={cellSize * width} y1={0} y2={cellSize * height} className={styles.line} />
         </g>
-        {data.map((_, index) => (
-          <rect
-            x={cellSize * (index % width)}
-            y={cellSize * Math.floor(index / width)}
-            width={cellSize}
-            height={cellSize}
-            key={index}
-            className={classNames(styles.cell)}
-          />
-        ))}
       </svg>
     </div>
   )

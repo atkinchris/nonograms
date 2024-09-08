@@ -5,11 +5,13 @@
 }
 
 .cell {
-  fill: none;
+  stroke: white;
+  fill: #000000;
+  stroke-width: 5;
 }
 
 .line {
-  stroke: rgb(0, 0, 0);
+  stroke: #252a34;
   stroke-width: 0.1;
 }
 
